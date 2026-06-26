@@ -1,4 +1,4 @@
-// 1. Data Base
+// 1. Data Base (IDs ab 1 se lekar 20 tak strictly unique hain)
 const products = [
     { id: 1, name: "Fresh Red Apples", category: "fruit", price: 140, oldPrice: 180, discount: "22% OFF", rating: 4.8, reviews: 120, image: "images/apple.jpg" },
     { id: 2, name: "Farm Tomatoes", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/tomato.jpg" },
@@ -15,12 +15,11 @@ const products = [
     { id: 13, name: "Fresh Peas", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/peas.jpg" },
     { id: 14, name: "Fresh Isquash", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/isquash.jpg" },
     { id: 15, name: "Fresh Red Potato", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/redpotato.jpg" },
-    { id: 9, name: "Fresh Aloo Bukhara", category: "fruit", price: 180, oldPrice: 220, discount: "18% OFF", rating: 4.9, reviews: 340, image: "images/aloobukhara.jpg" },
-    { id: 4, name: "Organic Pure Honey", category: "fruit", price: 750, oldPrice: 1000, discount: "25% OFF", rating: 4.6, reviews: 150, image: "images/purehoney.jpg" },
-    { id: 2, name: "Farm Simi", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/simi.jpg" },
-    { id: 2, name: "Farm Rayo Saag", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/rayo.jpg" },
-    { id: 2, name: "Farm Iskush Munta", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/munta.jpg" }
-
+    { id: 16, name: "Fresh Aloo Bukhara", category: "fruit", price: 180, oldPrice: 220, discount: "18% OFF", rating: 4.9, reviews: 340, image: "images/aloobukhara.jpg" },
+    { id: 17, name: "Organic Pure Honey", category: "fruit", price: 750, oldPrice: 1000, discount: "25% OFF", rating: 4.6, reviews: 150, image: "images/purehoney.jpg" },
+    { id: 18, name: "Farm Simi", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/simi.jpg" },
+    { id: 19, name: "Farm Rayo Saag", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/rayo.jpg" },
+    { id: 20, name: "Farm Iskush Munta", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/munta.jpg" }
 ];
 
 // 2. DOM Elements
@@ -32,19 +31,23 @@ const searchInput = document.getElementById('search-input');
 const mobileSearchInput = document.getElementById('mobile-search-input');
 const toastContainer = document.getElementById('toast-container');
 
-// Sidebar Elements
 const cartIconContainers = document.querySelectorAll('.cart-container');
 const cartSidebar = document.getElementById('cart-sidebar');
 const cartOverlay = document.getElementById('cart-overlay');
 const closeCartBtn = document.getElementById('close-cart');
 const cartItemsContainer = document.getElementById('cart-items');
 const cartTotalPrice = document.getElementById('cart-total-price');
+const cartSavingsElement = document.getElementById('cart-savings');
 
-// 3. Cart Data Setup
+// 3. Cart Data Setup (Now stores Objects instead of just IDs)
 let cart = JSON.parse(localStorage.getItem('veve_cart')) || [];
 
 function updateCartCount() {
     cartCountElement.innerText = cart.length;
+}
+
+function isProductInCart(productId) {
+    return cart.some(item => item.id === productId);
 }
 
 // Generate Star Rating HTML
@@ -67,7 +70,7 @@ function renderProducts(items) {
     } else {
         noResultsMsg.style.display = "none";
         items.forEach(product => {
-            const isAdded = cart.includes(product.id);
+            const isAdded = isProductInCart(product.id);
             const productCard = document.createElement('div');
             productCard.classList.add('product-card');
 
@@ -85,10 +88,10 @@ function renderProducts(items) {
                     </div>
 
                     <select class="weight-select" onchange="updatePrice(event, ${product.price}, ${product.oldPrice})">
-    <option value="0.5">500 g / Half</option>
-    <option value="1" selected>1 kg / 1 Unit</option>
-    <option value="2">2 kg / 2 Units</option>
-</select>
+                        <option value="0.5">500 g</option>
+                        <option value="1" selected>1 kg</option>
+                        <option value="2">2 kg</option>
+                    </select>
 
                     <div class="product-price-row">
                         <div class="price-box">
@@ -108,7 +111,23 @@ function renderProducts(items) {
     }
 }
 
-// 5. Category Filter
+// 5. Update Price Live
+function updatePrice(event, basePrice, baseOldPrice) {
+    const selectElement = event.target;
+    const multiplier = parseFloat(selectElement.value);
+    
+    const cardInfo = selectElement.closest('.product-info');
+    const currentPriceSpan = cardInfo.querySelector('.current-price');
+    const oldPriceSpan = cardInfo.querySelector('.old-price');
+    
+    const newCurrentPrice = Math.round(basePrice * multiplier);
+    const newOldPrice = Math.round(baseOldPrice * multiplier);
+    
+    currentPriceSpan.innerText = `₹${newCurrentPrice}`;
+    oldPriceSpan.innerText = `₹${newOldPrice}`;
+}
+
+// 6. Category Filter
 function filterByCategory(category) {
     document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
     filterBtns.forEach(btn => {
@@ -121,7 +140,7 @@ function filterByCategory(category) {
 
 filterBtns.forEach(btn => btn.addEventListener('click', (e) => filterByCategory(e.target.getAttribute('data-filter'))));
 
-// 6. Search Bar Logic
+// 7. Search Bar Logic
 function performSearch(e) {
     const searchTerm = e.target.value.toLowerCase();
     filterBtns.forEach(btn => btn.classList.remove('active'));
@@ -141,23 +160,43 @@ function performSearch(e) {
 searchInput.addEventListener('input', performSearch);
 mobileSearchInput.addEventListener('input', performSearch);
 
-// 7. Add to Cart Logic
+// 8. Advanced Add to Cart Logic (Saves exact weight & updated price)
 function addToCart(event, productId) {
-    if (!cart.includes(productId)) {
-        cart.push(productId);
+    if (!isProductInCart(productId)) {
+        
+        // Grab the card element
+        const card = event.currentTarget.closest('.product-card');
+        
+        // Find exactly what weight and price the user selected
+        const selectBox = card.querySelector('.weight-select');
+        const selectedWeight = selectBox.options[selectBox.selectedIndex].text;
+        
+        const currentPriceText = card.querySelector('.current-price').innerText.replace('₹', '');
+        const oldPriceText = card.querySelector('.old-price').innerText.replace('₹', '');
+        
+        const updatedPrice = parseInt(currentPriceText);
+        const updatedOldPrice = parseInt(oldPriceText);
+
+        // Store this exact information
+        const cartItem = {
+            id: productId,
+            weight: selectedWeight,
+            price: updatedPrice,
+            oldPrice: updatedOldPrice
+        };
+
+        cart.push(cartItem);
         localStorage.setItem('veve_cart', JSON.stringify(cart));
         updateCartCount();
 
-        // Update button UI
+        // Update Button
         const btn = event.currentTarget;
         btn.innerHTML = '<i class="fa-solid fa-check-double"></i> <span>In Cart</span>';
         btn.classList.add('added');
         btn.disabled = true;
 
         showToast("Item added to your cart!");
-        
-        // Background render to keep sidebar synced
-        renderCartItems();
+        renderCartItems(); // Keep sidebar updated
     }
 }
 
@@ -170,7 +209,7 @@ function showToast(message) {
     setTimeout(() => { toast.remove(); }, 3500);
 }
 
-// 8. Mobile Menu Logic
+// 9. Mobile Menu Logic
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
 const navItems = document.querySelectorAll('.nav-item');
@@ -190,7 +229,7 @@ navItems.forEach(item => {
     });
 });
 
-// 9. Cart Sidebar Logic
+// 10. Cart Sidebar Logic & Calculation
 cartIconContainers.forEach(icon => {
     icon.addEventListener('click', () => {
         cartSidebar.classList.add('active');
@@ -210,27 +249,33 @@ function closeCart() {
 function renderCartItems() {
     cartItemsContainer.innerHTML = "";
     let total = 0;
+    let totalOldPrice = 0;
 
-    if (cart.length === 0) {
+    // Filter valid cart objects (avoids crashes if old raw IDs exist)
+    const validCart = cart.filter(item => typeof item === 'object');
+
+    if (validCart.length === 0) {
         cartItemsContainer.innerHTML = `
             <div class="cart-empty">
                 <i class="fa-solid fa-basket-shopping"></i>
                 <p>Your cart is empty!</p>
             </div>
         `;
+        cartSavingsElement.innerText = `₹0`;
     } else {
-        cart.forEach(id => {
-            const product = products.find(p => p.id === id);
+        validCart.forEach(cartItem => {
+            const product = products.find(p => p.id === cartItem.id);
             if (product) {
-                total += product.price;
+                total += cartItem.price;
+                totalOldPrice += cartItem.oldPrice;
 
                 const itemDiv = document.createElement('div');
                 itemDiv.classList.add('cart-item');
                 itemDiv.innerHTML = `
                     <img src="${product.image}" alt="${product.name}">
                     <div class="cart-item-info">
-                        <h4 class="cart-item-title">${product.name}</h4>
-                        <span class="cart-item-price">₹${product.price}</span>
+                        <h4 class="cart-item-title">${product.name} <br><span style="color:#6b7280; font-size:12px;">(${cartItem.weight})</span></h4>
+                        <span class="cart-item-price">₹${cartItem.price} <del style="color:#9ca3af; font-size:12px; margin-left:5px;">₹${cartItem.oldPrice}</del></span>
                     </div>
                     <button class="remove-item" onclick="removeFromCart(${product.id})">
                         <i class="fa-solid fa-trash-can"></i>
@@ -239,19 +284,22 @@ function renderCartItems() {
                 cartItemsContainer.appendChild(itemDiv);
             }
         });
+        
+        // Calculate Total Savings
+        const totalSavings = totalOldPrice - total;
+        cartSavingsElement.innerText = `₹${totalSavings}`;
     }
 
     cartTotalPrice.innerText = `₹${total}`;
 }
 
 function removeFromCart(productId) {
-    cart = cart.filter(id => id !== productId);
+    cart = cart.filter(item => item.id !== productId);
     localStorage.setItem('veve_cart', JSON.stringify(cart));
     
     updateCartCount();
     renderCartItems();
     
-    // Refresh shop grid to reset "In Cart" button
     const activeFilterBtn = document.querySelector('.filter-btn.active');
     const category = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : 'all';
     
@@ -259,30 +307,15 @@ function removeFromCart(productId) {
     renderProducts(filteredProducts);
 }
 
-// 10. Initialization
+// 11. Initialization
 window.onload = () => {
+    // Clear old format IDs to prevent errors
+    if(cart.length > 0 && typeof cart[0] !== 'object') {
+        cart = [];
+        localStorage.removeItem('veve_cart');
+    }
+    
     updateCartCount(); 
     renderProducts(products); 
     renderCartItems();
 };
-// ==========================================
-// QUANTITY & PRICE CALCULATOR LOGIC
-// ==========================================
-function updatePrice(event, basePrice, baseOldPrice) {
-    // Dropdown se value (0.5, 1, ya 2) nikalna
-    const selectElement = event.target;
-    const multiplier = parseFloat(selectElement.value);
-    
-    // Usi product card ke andar price wale text ko dhoondhna
-    const cardInfo = selectElement.closest('.product-info');
-    const currentPriceSpan = cardInfo.querySelector('.current-price');
-    const oldPriceSpan = cardInfo.querySelector('.old-price');
-    
-    // Naya price calculate karna (Base Price x Weight)
-    const newCurrentPrice = Math.round(basePrice * multiplier);
-    const newOldPrice = Math.round(baseOldPrice * multiplier);
-    
-    // Screen par naya price likhna
-    currentPriceSpan.innerText = `₹${newCurrentPrice}`;
-    oldPriceSpan.innerText = `₹${newOldPrice}`;
-}
