@@ -16,6 +16,8 @@ const products = [
     { id: 14, name: "Fresh Isquash", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/isquash.jpg" },
     { id: 15, name: "Fresh Red Potato", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/redpotato.jpg" },
     { id: 9, name: "Fresh Aloo Bukhara", category: "fruit", price: 180, oldPrice: 220, discount: "18% OFF", rating: 4.9, reviews: 340, image: "images/aloobukhara.jpg" },
+    { id: 4, name: "Organic Pure Honey", category: "fruit", price: 750, oldPrice: 1000, discount: "25% OFF", rating: 4.6, reviews: 150, image: "images/purehoney.jpg" }
+
 ];
 
 // 2. DOM Elements
