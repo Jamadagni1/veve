@@ -1,4 +1,4 @@
-// 1. Data Base (Har ek me discount aur rating add ki gayi hai)
+// 1. Data Base
 const products = [
     { id: 1, name: "Fresh Red Apples", category: "fruit", price: 140, oldPrice: 180, discount: "22% OFF", rating: 4.8, reviews: 120, image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6faa6?auto=format&fit=crop&w=500&q=80" },
     { id: 2, name: "Farm Tomatoes", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=500&q=80" },
@@ -14,7 +14,7 @@ const products = [
     { id: 12, name: "Fresh Carrots", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=500&q=80" }
 ];
 
-// Elements
+// 2. DOM Elements
 const productGrid = document.getElementById('product-grid');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const cartCountElement = document.getElementById('cart-count');
@@ -23,7 +23,15 @@ const searchInput = document.getElementById('search-input');
 const mobileSearchInput = document.getElementById('mobile-search-input');
 const toastContainer = document.getElementById('toast-container');
 
-// LocalStorage setup for Cart
+// Sidebar Elements
+const cartIconContainers = document.querySelectorAll('.cart-container');
+const cartSidebar = document.getElementById('cart-sidebar');
+const cartOverlay = document.getElementById('cart-overlay');
+const closeCartBtn = document.getElementById('close-cart');
+const cartItemsContainer = document.getElementById('cart-items');
+const cartTotalPrice = document.getElementById('cart-total-price');
+
+// 3. Cart Data Setup
 let cart = JSON.parse(localStorage.getItem('veve_cart')) || [];
 
 function updateCartCount() {
@@ -41,7 +49,7 @@ function getStars(rating) {
     return starsHtml;
 }
 
-// 2. Render Products
+// 4. Render Products
 function renderProducts(items) {
     productGrid.innerHTML = ""; 
     
@@ -91,7 +99,7 @@ function renderProducts(items) {
     }
 }
 
-// 3. Category Filter
+// 5. Category Filter
 function filterByCategory(category) {
     document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
     filterBtns.forEach(btn => {
@@ -104,7 +112,7 @@ function filterByCategory(category) {
 
 filterBtns.forEach(btn => btn.addEventListener('click', (e) => filterByCategory(e.target.getAttribute('data-filter'))));
 
-// 4. Working Search Bar Function
+// 6. Search Bar Logic
 function performSearch(e) {
     const searchTerm = e.target.value.toLowerCase();
     filterBtns.forEach(btn => btn.classList.remove('active'));
@@ -124,40 +132,36 @@ function performSearch(e) {
 searchInput.addEventListener('input', performSearch);
 mobileSearchInput.addEventListener('input', performSearch);
 
-// 5. Add to Cart with LocalStorage & Toast Notification
+// 7. Add to Cart Logic
 function addToCart(event, productId) {
     if (!cart.includes(productId)) {
-        // Save to LocalStorage
         cart.push(productId);
         localStorage.setItem('veve_cart', JSON.stringify(cart));
         updateCartCount();
 
-        // Change Button visually
+        // Update button UI
         const btn = event.currentTarget;
         btn.innerHTML = '<i class="fa-solid fa-check-double"></i> <span>In Cart</span>';
         btn.classList.add('added');
         btn.disabled = true;
 
-        // Show professional Toast Notification
         showToast("Item added to your cart!");
+        
+        // Background render to keep sidebar synced
+        renderCartItems();
     }
 }
 
-// Professional Toast Popup Function
+// Toast Popup
 function showToast(message) {
     const toast = document.createElement('div');
     toast.classList.add('toast');
     toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
-    
     toastContainer.appendChild(toast);
-
-    // Remove toast after animation ends (approx 3.5s)
-    setTimeout(() => {
-        toast.remove();
-    }, 3500);
+    setTimeout(() => { toast.remove(); }, 3500);
 }
 
-// 6. Mobile Menu Logic
+// 8. Mobile Menu Logic
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
 const navItems = document.querySelectorAll('.nav-item');
@@ -177,8 +181,78 @@ navItems.forEach(item => {
     });
 });
 
-// Init load
+// 9. Cart Sidebar Logic
+cartIconContainers.forEach(icon => {
+    icon.addEventListener('click', () => {
+        cartSidebar.classList.add('active');
+        cartOverlay.classList.add('active');
+        renderCartItems();
+    });
+});
+
+closeCartBtn.addEventListener('click', closeCart);
+cartOverlay.addEventListener('click', closeCart);
+
+function closeCart() {
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+}
+
+function renderCartItems() {
+    cartItemsContainer.innerHTML = "";
+    let total = 0;
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `
+            <div class="cart-empty">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <p>Your cart is empty!</p>
+            </div>
+        `;
+    } else {
+        cart.forEach(id => {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                total += product.price;
+
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('cart-item');
+                itemDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="cart-item-info">
+                        <h4 class="cart-item-title">${product.name}</h4>
+                        <span class="cart-item-price">₹${product.price}</span>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(${product.id})">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+            }
+        });
+    }
+
+    cartTotalPrice.innerText = `₹${total}`;
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(id => id !== productId);
+    localStorage.setItem('veve_cart', JSON.stringify(cart));
+    
+    updateCartCount();
+    renderCartItems();
+    
+    // Refresh shop grid to reset "In Cart" button
+    const activeFilterBtn = document.querySelector('.filter-btn.active');
+    const category = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : 'all';
+    
+    const filteredProducts = category === "all" ? products : products.filter(p => p.category === category);
+    renderProducts(filteredProducts);
+}
+
+// 10. Initialization
 window.onload = () => {
-    updateCartCount(); // Set cart badge on load
-    renderProducts(products); // Render products
+    updateCartCount(); 
+    renderProducts(products); 
+    renderCartItems();
 };
