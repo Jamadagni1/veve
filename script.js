@@ -1,17 +1,17 @@
 // 1. Data Base
 const products = [
     { id: 1, name: "Fresh Red Apples", category: "fruit", price: 140, oldPrice: 180, discount: "22% OFF", rating: 4.8, reviews: 120, image: "images/apple.jpg" },
-    { id: 2, name: "Farm Tomatoes", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=500&q=80" },
+    { id: 2, name: "Farm Tomatoes", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/tomato.jpg" },
     { id: 3, name: "Avocado Hass", category: "exotic", price: 250, oldPrice: 300, discount: "16% OFF", rating: 4.9, reviews: 200, image: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=500&q=80" },
     { id: 4, name: "Organic Bananas", category: "fruit", price: 60, oldPrice: 80, discount: "25% OFF", rating: 4.6, reviews: 150, image: "images/banana.jpg" },
-    { id: 5, name: "Fresh Broccoli", category: "vegetable", price: 75, oldPrice: 100, discount: "25% OFF", rating: 4.7, reviews: 90, image: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=500&q=80" },
+    { id: 5, name: "Fresh Broccoli", category: "vegetable", price: 75, oldPrice: 100, discount: "25% OFF", rating: 4.7, reviews: 90, image: "images/broccoli.jpg" },
     { id: 6, name: "Kiwi Zespri", category: "exotic", price: 120, oldPrice: 150, discount: "20% OFF", rating: 4.8, reviews: 110, image: "images/kiwi.jpg" },
-    { id: 7, name: "Nagpur Oranges", category: "fruit", price: 120, oldPrice: 150, discount: "20% OFF", rating: 4.5, reviews: 75, image: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=500&q=80" },
-    { id: 8, name: "Red Onions", category: "vegetable", price: 35, oldPrice: 50, discount: "30% OFF", rating: 4.4, reviews: 210, image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=500&q=80" },
-    { id: 9, name: "Fresh Strawberries", category: "fruit", price: 180, oldPrice: 220, discount: "18% OFF", rating: 4.9, reviews: 340, image: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=500&q=80" },
-    { id: 10, name: "Green Capsicum", category: "vegetable", price: 45, oldPrice: 60, discount: "25% OFF", rating: 4.3, reviews: 60, image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=500&q=80" },
-    { id: 11, name: "Dragon Fruit", category: "exotic", price: 90, oldPrice: 120, discount: "25% OFF", rating: 4.6, reviews: 45, image: "https://images.unsplash.com/photo-1527325678964-54921661f888?auto=format&fit=crop&w=500&q=80" },
-    { id: 12, name: "Fresh Carrots", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=500&q=80" }
+    { id: 7, name: "Nagpur Oranges", category: "fruit", price: 120, oldPrice: 150, discount: "20% OFF", rating: 4.5, reviews: 75, image: "images/orange.jpg" },
+    { id: 8, name: "Red Onions", category: "vegetable", price: 35, oldPrice: 50, discount: "30% OFF", rating: 4.4, reviews: 210, image: "images/onion.jpg" },
+    { id: 9, name: "Fresh Strawberries", category: "fruit", price: 180, oldPrice: 220, discount: "18% OFF", rating: 4.9, reviews: 340, image: "images/strobarry.jpg" },
+    { id: 10, name: "Green Capsicum", category: "vegetable", price: 45, oldPrice: 60, discount: "25% OFF", rating: 4.3, reviews: 60, image: "images/capsicum.jpg" },
+    { id: 11, name: "Dragon Fruit", category: "exotic", price: 90, oldPrice: 120, discount: "25% OFF", rating: 4.6, reviews: 45, image: "images/dragon.jpg" },
+    { id: 12, name: "Fresh Carrots", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/carrot.jpg" }
 ];
 
 // 2. DOM Elements
