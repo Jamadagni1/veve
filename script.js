@@ -12,9 +12,9 @@ const products = [
     { id: 10, name: "Green Capsicum", category: "vegetable", price: 45, oldPrice: 60, discount: "25% OFF", rating: 4.3, reviews: 60, image: "images/capsicum.jpg" },
     { id: 11, name: "Dragon Fruit", category: "exotic", price: 90, oldPrice: 120, discount: "25% OFF", rating: 4.6, reviews: 45, image: "images/dragon.jpg" },
     { id: 12, name: "Fresh Carrots", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/carrot.jpg" },
-    { id: 13, name: "Fresh peas", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/peas.jpg" },
-    { id: 14, name: "Fresh isquash", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/isquash.jpg" },
-    { id: 15, name: "Fresh red potato", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/redpotato.jpg" },
+    { id: 13, name: "Fresh Peas", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/peas.jpg" },
+    { id: 14, name: "Fresh Isquash", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/isquash.jpg" },
+    { id: 15, name: "Fresh Red Potato", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/redpotato.jpg" },
     { id: 9, name: "Fresh Aloo Bukhara", category: "fruit", price: 180, oldPrice: 220, discount: "18% OFF", rating: 4.9, reviews: 340, image: "images/aloobukhara.jpg" },
 ];
 
