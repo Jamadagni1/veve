@@ -16,7 +16,10 @@ const products = [
     { id: 14, name: "Fresh Isquash", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/isquash.jpg" },
     { id: 15, name: "Fresh Red Potato", category: "vegetable", price: 50, oldPrice: 70, discount: "28% OFF", rating: 4.7, reviews: 130, image: "images/redpotato.jpg" },
     { id: 9, name: "Fresh Aloo Bukhara", category: "fruit", price: 180, oldPrice: 220, discount: "18% OFF", rating: 4.9, reviews: 340, image: "images/aloobukhara.jpg" },
-    { id: 4, name: "Organic Pure Honey", category: "fruit", price: 750, oldPrice: 1000, discount: "25% OFF", rating: 4.6, reviews: 150, image: "images/purehoney.jpg" }
+    { id: 4, name: "Organic Pure Honey", category: "fruit", price: 750, oldPrice: 1000, discount: "25% OFF", rating: 4.6, reviews: 150, image: "images/purehoney.jpg" },
+    { id: 2, name: "Farm Simi", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/simi.jpg" },
+    { id: 2, name: "Farm Rayo Saag", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/rayo.jpg" },
+    { id: 2, name: "Farm Iskush Munta", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/munta.jpg" }
 
 ];
 
