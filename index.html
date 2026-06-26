@@ -3,48 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fresh Fruits & Vegetables - Veve Bazaar </title>
+    <title>Sewa Bazaar - Fresh Fruits & Veggies</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for Cart Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Header & Navigation -->
     <header class="navbar">
-        <div class="logo">
-            Veve<span>Bazaar</span>
-        </div>
-        <div class="cart-container">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-badge" id="cart-count">0</span>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-leaf"></i> Sewa<span>Bazaar</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About Us</a>
+            </div>
+
+            <div class="nav-icons">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search fresh items...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="user-icon"><i class="fa-regular fa-user"></i></div>
+                <div class="cart-container">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Banner -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#" class="active">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#categories">Categories</a>
+        <a href="#about">About Us</a>
+    </div>
+
     <section class="hero-banner">
         <div class="hero-content">
-            <h1>Fruits & Vegetables</h1>
-            <p>Fresh from the farm to your doorstep! 100% Organic & Healthy.</p>
+            <span class="badge">100% Organic</span>
+            <h1>Fresh from Farm to Doorstep</h1>
+            <p>Experience the taste of nature with our handpicked, pesticide-free fruits and vegetables delivered fresh every morning.</p>
+            <button class="shop-now-btn">Shop Now <i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="main-container">
-        <!-- Filters -->
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="fruit">Fresh Fruits</button>
-            <button class="filter-btn" data-filter="vegetable">Fresh Vegetables</button>
+    <section class="features">
+        <div class="feature-box">
+            <i class="fa-solid fa-truck-fast"></i>
+            <div>
+                <h3>Free Delivery</h3>
+                <p>On orders over ₹500</p>
+            </div>
+        </div>
+        <div class="feature-box">
+            <i class="fa-solid fa-seedling"></i>
+            <div>
+                <h3>100% Organic</h3>
+                <p>Fresh from local farms</p>
+            </div>
+        </div>
+        <div class="feature-box">
+            <i class="fa-solid fa-tags"></i>
+            <div>
+                <h3>Daily Offers</h3>
+                <p>Save money every day</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-container" id="shop">
+        <div class="section-title">
+            <h2>Our Fresh Products</h2>
+            <p>Select from our wide variety of daily essentials</p>
         </div>
 
-        <!-- Product Grid -->
-        <div class="product-grid" id="product-grid">
-            <!-- JavaScript yahan products load karega -->
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Items</button>
+            <button class="filter-btn" data-filter="fruit">Fresh Fruits</button>
+            <button class="filter-btn" data-filter="vegetable">Vegetables</button>
+            <button class="filter-btn" data-filter="exotic">Exotic</button>
         </div>
+
+        <div class="product-grid" id="product-grid">
+            </div>
     </main>
+
+    <footer id="about">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-leaf"></i> Sewa<span>Bazaar</span>
+                </div>
+                <p>Your one-stop destination for the freshest, healthiest, and 100% organic farm produce.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Shop</a>
+                <a href="#">Contact Us</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Categories</h3>
+                <a href="#">Fresh Fruits</a>
+                <a href="#">Green Vegetables</a>
+                <a href="#">Exotic Items</a>
+                <a href="#">Daily Essentials</a>
+            </div>
+
+            <div class="footer-col newsletter">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get updates on daily fresh arrivals and offers.</p>
+                <div class="subscribe-box">
+                    <input type="email" placeholder="Your Email">
+                    <button><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sewa Bazaar. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
