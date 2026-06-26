@@ -265,3 +265,24 @@ window.onload = () => {
     renderProducts(products); 
     renderCartItems();
 };
+// ==========================================
+// QUANTITY & PRICE CALCULATOR LOGIC
+// ==========================================
+function updatePrice(event, basePrice, baseOldPrice) {
+    // Dropdown se value (0.5, 1, ya 2) nikalna
+    const selectElement = event.target;
+    const multiplier = parseFloat(selectElement.value);
+    
+    // Usi product card ke andar price wale text ko dhoondhna
+    const cardInfo = selectElement.closest('.product-info');
+    const currentPriceSpan = cardInfo.querySelector('.current-price');
+    const oldPriceSpan = cardInfo.querySelector('.old-price');
+    
+    // Naya price calculate karna (Base Price x Weight)
+    const newCurrentPrice = Math.round(basePrice * multiplier);
+    const newOldPrice = Math.round(baseOldPrice * multiplier);
+    
+    // Screen par naya price likhna
+    currentPriceSpan.innerText = `₹${newCurrentPrice}`;
+    oldPriceSpan.innerText = `₹${newOldPrice}`;
+}
