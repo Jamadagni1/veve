@@ -84,11 +84,11 @@ function renderProducts(items) {
                         ${getStars(product.rating)} <span>(${product.reviews})</span>
                     </div>
 
-                    <select class="weight-select">
-                        <option value="500g">500 g</option>
-                        <option value="1kg" selected>1 kg</option>
-                        <option value="2kg">2 kg</option>
-                    </select>
+                    <select class="weight-select" onchange="updatePrice(event, ${product.price}, ${product.oldPrice})">
+    <option value="0.5">500 g / Half</option>
+    <option value="1" selected>1 kg / 1 Unit</option>
+    <option value="2">2 kg / 2 Units</option>
+</select>
 
                     <div class="product-price-row">
                         <div class="price-box">
