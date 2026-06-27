@@ -1,6 +1,5 @@
 // 1. Data Base (IDs ab 1 se lekar 20 tak strictly unique hain)
 const products = [
-    const products = [
     { id: 1, name: "Fresh Red Apples", category: "fruit", price: 140, oldPrice: 180, discount: "22% OFF", rating: 4.8, reviews: 120, image: "images/apple.jpg" },
     { id: 2, name: "Farm Tomatoes", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/tomato.jpg" },
     { id: 3, name: "Avocado Hass", category: "exotic", price: 250, oldPrice: 300, discount: "16% OFF", rating: 4.9, reviews: 200, image: "images/avocodo.jpg" },
@@ -22,7 +21,6 @@ const products = [
     { id: 19, name: "Farm Rayo Saag", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/rayo.jpg" },
     { id: 20, name: "Farm Iskush Munta", category: "vegetable", price: 40, oldPrice: 60, discount: "33% OFF", rating: 4.5, reviews: 85, image: "images/munta.jpg" }
 ];
-
 
 // 2. DOM Elements
 const productGrid = document.getElementById('product-grid');
